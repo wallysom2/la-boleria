@@ -1,5 +1,9 @@
 import db  from "../db/database.js";
 
+async function getCakeByName(name) {
+    return db.query(`SELECT * FROM cakes WHERE name = $1 `, [name]);
+  }
+
 async function insertCake ({
     name,
     price,
@@ -15,5 +19,11 @@ const result = await db.query
 return result;
 }
 
-export default insertCake ;
+const cakesRepository = {
+    getCakeByName,
+    insertCake
+
+}
+
+export default cakesRepository;
 
