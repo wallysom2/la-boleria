@@ -13,7 +13,7 @@ CREATE TABLE clients (
    phone VARCHAR NOT NULL
 );
 
-CREATE TABLE urls (
+CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
   "clientId" INTEGER REFERENCES clients(id),
   "cakeId" INTEGER REFERENCES cakes(id),
