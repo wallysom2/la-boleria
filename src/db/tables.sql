@@ -3,7 +3,7 @@ CREATE TABLE cakes (
   name VARCHAR NOT NULL,
   price NUMERIC NOT NULL,
   image VARCHAR NOT NULL,
-  description TEXT NOT NULL
+  description TEXT
 );
 
 CREATE TABLE clients (
@@ -15,9 +15,9 @@ CREATE TABLE clients (
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
-  "clientId" INTEGER REFERENCES clients(id),
-  "cakeId" INTEGER REFERENCES cakes(id),
+  "clientId" INTEGER  NOT NULL REFERENCES clients(id),
+  "cakeId" INTEGER NOT NULL REFERENCES cakes(id),
   quantity INTEGER NOT NULL,
-  "createdAt" TIMESTAMP DEFAULT NOW(),
+  "createdAt" TIMESTAMP  NOT NULL DEFAULT NOW(),
   "totalPrice" NUMERIC NOT NULL
 );

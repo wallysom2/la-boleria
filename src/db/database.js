@@ -1,4 +1,6 @@
 import pg from 'pg';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const { Pool } = pg;
 const config = {
@@ -7,7 +9,6 @@ const config = {
         rejectUnauthorized: false
     }
 }
-
 
 const db = new Pool(config);
 export default db;
