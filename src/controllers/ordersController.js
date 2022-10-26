@@ -67,10 +67,48 @@ async function showOrders (req, res) {
     }
 }
 
+async function showOrderById (req,res){
+    const {id} = req.params;
+    try {
+    const  { rows: order } = await orderRepository.getOrderById(id)
+        if ( order.length == 0){
+            return res.status(404).send([]);
+        }
+        const element = order.map(
+            element => (
+                {
+                    clients: {
+                        id: element.clientId,
+                        name: element.clientName,
+                        address: element.clientAddress,
+                        phone: element.clientPhone
+                    },
+                    cake: {
+                        id: element.cakeId,
+                        name: element.cakeName,
+                        price: element.cakePrice,
+                        description: element.cakeDescription,
+                        image: element.cakeImage
+                    },
+                    orderId: element.elementId,
+                    createdAt: element.createdAt,
+                    quantity: element.quantity,
+                    totalPrice: element.totalPrice
+                }
+            )
+        )
+        return res.status(200).send(element)
+
+    }catch(error){
+        console.log(error)
+        return res.status(500).send("Nao foi possivel identificar a ordem de compra")
+    }
+}
 
 const orderController = {
     newOrder,
-    showOrders
+    showOrders,
+    showOrderById
  }
  
  export default orderController;

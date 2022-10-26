@@ -17,5 +17,6 @@ router.post ('/clients', validateSchema(clientSchema), newClient);
 router.post ('/order', validateSchema(orderSchema), orderController.newOrder);
 
 router.get ('/orders', orderController.showOrders);
+router.get ('/orders/:id', orderController.showOrderById);
 
 export default router;
