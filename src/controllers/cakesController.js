@@ -3,12 +3,13 @@ import cakesRepository from "../repositories/cakesRepository.js"
 async function newCake (req,res) {
     const { name, price, image, description } = req.body;
 
-    const isValidCakeName = await cakesRepository.getCakeByName (name)
-    if (isValidCakeName.rowCount > 0) {
-      return res.status(409).send("Nome ja existe")
-    }
-
     try {
+
+        const isValidCakeName = await cakesRepository.getCakeByName (name)
+        if (isValidCakeName.rowCount > 0) {
+          return res.status(409).send("Nome ja existe")
+        }
+
         await cakesRepository.insertCake ({
             name, price, image, description
         });
